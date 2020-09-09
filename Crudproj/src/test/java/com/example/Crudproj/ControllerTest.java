@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -37,21 +38,29 @@ public class ControllerTest {
 	//public void init() {
 		//MockitoAnnotations.initMocks(this);
 	//}
-	@Test
-	public void getAllProduct()
-	{
-		List<Product> list =new ArrayList<Product>();
-		Product idone = new Product();
-		Product idtwo = new Product();
-		Product idthree = new Product();
-		
-		list.add(idone);
-		list.add(idtwo);
-		list.add(idthree);
-		
-		when(service.getAllProducts()).thenReturn(list);
-		controller.getAllProduct();
-	}
+	/*
+	 * @Test public void getAllProduct() { List<Product> list =new
+	 * ArrayList<Product>(); Product idone = new Product(); Product idtwo = new
+	 * Product(); Product idthree = new Product();
+	 * 
+	 * list.add(idone); list.add(idtwo); list.add(idthree);
+	 * 
+	 * when(service.getAllProducts()).thenReturn(list); controller.getAllProduct();
+	 * }
+	 */
+	/*
+	 * private List<Product> userList;
+	 * 
+	 * @BeforeEach public void setUp() { this.productrepository =
+	 * 
+	 * }
+	 * 
+	 * public void getAllProduct() throws Exception{
+	 * given(Product).willReturn(userList);
+	 * this.mockMvc.perform(get("/testing/product")) .andExpect(status().isOk())
+	 * .andExpect(jsonPath("$.size()",is (userList.size()))); }
+	 */
+	
 	@Test
 	public void getProductById()
 	
