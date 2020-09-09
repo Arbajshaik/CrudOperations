@@ -1,6 +1,7 @@
 package com.example.Crudproj;
 
 
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -61,18 +62,22 @@ public class ControllerTest {
 	@Test
 	public void createProduct()
 	{
-      Product id = new Product();
-      controller.createProduct(id);
-      verify(service,times(1)).createProduct(id);
+      Product product = new Product();
+      controller.createProduct(product);
+      verify(service,times(1)).createProduct(product);
 	}
 	@Test
 	public void updateProduct()
 	{
-	
+		Product product = new Product();
+		controller.updateProduct(1, product);
+		assertNotNull(product);
 	}
 	@Test
 	public void deleteProduct() {
-		
+		//controller.deleteProduct(1);
+		assertNotNull(controller.deleteProduct(1));
+
 	}
 	
 
