@@ -1,6 +1,7 @@
 package com.example.Crudproj;
 
 
+import static org.junit.Assert.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ import service.Product;
 import service.ProductRepository;
 import service.ProductServiceImpl;
 
-//@SpringBootConfiguration
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest (classes  = CrudprojApplicationTests.class)
 public class ServiceTest {
@@ -35,14 +36,11 @@ public class ServiceTest {
 			Product idone = new Product();
 			Product idtwo = new Product();
 			Product idthree = new Product();
-			
 			list.add(idone);
 			list.add(idtwo);
 			list.add(idthree);
-			
-			when(serviceimp.getAllProducts()).thenReturn(list);
-			serviceimp.getAllProducts();
-			
+		when(serviceimp.getAllProducts()).thenReturn(list);
+		assertNotNull(	serviceimp.getAllProducts());
 	 }
 	 @Test
 		public void getProductById()

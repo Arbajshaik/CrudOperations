@@ -32,7 +32,6 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Product updateProduct(Product product) {
 		Optional<Product>  productDb = this.productRepository.findById(product.getId());
-//	Optional<Product> productDb =this.productRepository.findAll()
 	if (productDb.isPresent()) {
 		Product productUpdate = productDb.get();
 		productUpdate.setId(product.getId());

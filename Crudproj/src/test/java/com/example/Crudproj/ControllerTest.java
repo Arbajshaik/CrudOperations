@@ -28,7 +28,6 @@ import service.Product;
 import service.ProductService;
 
 
-//@SpringBootConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest (classes  = CrudprojApplicationTests.class)
 public class ControllerTest {
