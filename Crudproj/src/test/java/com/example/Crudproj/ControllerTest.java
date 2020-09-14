@@ -1,9 +1,9 @@
 package com.example.Crudproj;
-
-
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import java.io.IOException;
 import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -29,7 +28,7 @@ import service.Product;
 import service.ProductService;
 
 
-@SpringBootConfiguration
+//@SpringBootConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest (classes  = CrudprojApplicationTests.class)
 public class ControllerTest {
@@ -69,13 +68,12 @@ protected MockMvc mvc;
    public void getAllProduct() throws Exception{
 	   String uri ="/testing/product";
 	   MvcResult result =mvc.perform(MockMvcRequestBuilders.get(uri)
-			      .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-			   
-int Status=result.getResponse().getStatus();
-
-	   String content = result.getResponse().getContentAsString();
-	  
-	 assertNotNull(content);  
+	   .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();   
+         int Status=result.getResponse().getStatus();
+         assertEquals(200, Status);
+         String content = result.getResponse().getContentAsString();	  
+         Product[] productlist = mapFromJson(content, Product[].class);
+         assertTrue(productlist.length > 0);       
    }
 
 	
@@ -87,10 +85,9 @@ int Status=result.getResponse().getStatus();
 		   product.setId(1);
 		   product.setName("Ginger");
 		   product.setDesciption("desciption");
-		   
 		   String inputJson = mapToJson(product);
 		   MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.post(uri)
-		      .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();	  
+		  .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();	  
 		   String content = mvcResult.getResponse().getContentAsString();
 	}
 	
@@ -98,12 +95,11 @@ int Status=result.getResponse().getStatus();
 	public void updateProduct() throws Exception {
 		 String uri = "/testing/products/1";
 		   Product product = new Product();
-		   product.setName("name");
-		   
+		   product.setName("name");		   
 		   String inputJson = mapToJson(product);
 		   MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(uri)
-		      .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();
-		     String content = mvcResult.getResponse().getContentAsString();
+           .contentType(MediaType.APPLICATION_JSON_VALUE).content(inputJson)).andReturn();		 
+		   String content = mvcResult.getResponse().getContentAsString();
 			   assertNotNull(content); 
 
 		}
@@ -112,8 +108,7 @@ int Status=result.getResponse().getStatus();
 	public void deleteProduct() throws Exception {
 		 Product product = new Product();
 		 String uri = "//testing/products/1";
-		   MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
-		   
+		   MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();		   
 		   String content = mvcResult.getResponse().getContentAsString();
 		   assertNotNull(content); 
 	}

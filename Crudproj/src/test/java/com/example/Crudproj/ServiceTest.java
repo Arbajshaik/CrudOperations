@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -17,7 +16,7 @@ import service.Product;
 import service.ProductRepository;
 import service.ProductServiceImpl;
 
-@SpringBootConfiguration
+//@SpringBootConfiguration
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest (classes  = CrudprojApplicationTests.class)
 public class ServiceTest {
@@ -43,6 +42,7 @@ public class ServiceTest {
 			
 			when(serviceimp.getAllProducts()).thenReturn(list);
 			serviceimp.getAllProducts();
+			
 	 }
 	 @Test
 		public void getProductById()
@@ -70,6 +70,7 @@ public class ServiceTest {
 		 Optional<Product> productDb = Optional.ofNullable(product);
 		 when(repo.findById((long) 12345)).thenReturn( productDb);
 		 serviceimp.deleteProduct(12345);
+			assertEquals("description", product.getDesciption());
 		}		
 }
 
